@@ -12,11 +12,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+        \App\Models\Status::factory()
+            ->count(3)
+            ->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        \App\Models\Item::factory()->count(10)->create()->each(function ($item){
+            $item->statuses()->attach(\App\Models\Status::all()->random());
+            $item->statuses()->attach(\App\Models\Status::all()->random());
+            $item->statuses()->attach(\App\Models\Status::all()->random());
+        });
     }
 }
