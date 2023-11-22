@@ -19,9 +19,8 @@ class Item extends Model
         return $this->belongsToMany(Status::class);
     }
 
-    public function latestStatus()
+    public function getStatusAttribute()
     {
-        return $this->statuses()
-            ->first();
+        return $this->statuses()->orderBy('created_at', 'desc')->first();
     }
 }
