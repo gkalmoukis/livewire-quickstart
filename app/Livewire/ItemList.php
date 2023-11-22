@@ -20,9 +20,7 @@ class ItemList extends \Livewire\Component
 
     public function save()
     {
-        $this->validate();
-
-        $item = \App\Models\Item::create($this->form->all());
+        $this->form->store(); 
 
         $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
     }
