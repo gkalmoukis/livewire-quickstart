@@ -13,4 +13,17 @@ class Items extends Model
         'name',
         'description',
     ];
+
+    public function statuses()
+    {
+        return $this->belongsToMany(Status::class)
+            ->withPivot('created_at')
+            ->orderBy('pivot_created_at', 'desc');
+    }
+
+    public function latestStatus()
+    {
+        return $this->statuses()
+            ->first();
+    }
 }

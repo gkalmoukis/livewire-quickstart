@@ -13,4 +13,9 @@ class Status extends Model
         'name',
         'color',
     ];
+
+    public function items()
+    {
+        return $this->belongsToMany(Item::class);
+    }
 }
