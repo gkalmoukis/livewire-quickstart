@@ -9,7 +9,7 @@ class ItemData extends \Spatie\LaravelData\Data implements \Livewire\Wireable
     public function __construct(
         public int $id,
         public string $name,
-        public string $description,
+        public ?string $description,
         public ?\App\Data\StatusData $status,
         public string $created_at,
     ) {
