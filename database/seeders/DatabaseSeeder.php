@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
             ->count(3)
             ->create();
 
-        \App\Models\Item::factory()->count(10)->create()->each(function ($item){
+        \App\Models\Item::factory()->count(10)->create()->each(function ($item) {
             $item->statuses()->attach(\App\Models\Status::all()->random());
             $item->statuses()->attach(\App\Models\Status::all()->random());
             $item->statuses()->attach(\App\Models\Status::all()->random());

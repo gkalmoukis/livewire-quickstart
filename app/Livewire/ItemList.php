@@ -10,7 +10,7 @@ class ItemList extends \Livewire\Component
     {
         $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
     }
-    
+
     public function render()
     {
         return view('livewire.item-list');

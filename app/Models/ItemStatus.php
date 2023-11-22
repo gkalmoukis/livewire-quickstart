@@ -7,8 +7,8 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class ItemStatus extends Pivot
 {
     protected $fillable = [
-        'item_id', 
-        'status_id'
+        'item_id',
+        'status_id',
     ];
 
     public function item()

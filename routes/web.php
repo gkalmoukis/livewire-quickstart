@@ -13,6 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-
 Route::get('/', \App\Livewire\ItemList::class);
 Route::get('/{id}', \App\Livewire\ItemShow::class)->name('show');
