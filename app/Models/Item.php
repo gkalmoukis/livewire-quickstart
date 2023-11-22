@@ -14,6 +14,10 @@ class Item extends Model
         'description',
     ];
 
+    protected $appends = [
+        'status'
+    ];
+
     public function statuses()
     {
         return $this->belongsToMany(Status::class);
