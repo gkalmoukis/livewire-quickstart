@@ -2,35 +2,17 @@
 
 namespace App\Livewire;
 
-use Livewire\Component;
-
-class ItemList extends Component
+class ItemList extends \Livewire\Component
 {
-
-    public $items = [];
-    public $name = '';
-    public $description = '';
+    public \Illuminate\Support\Collection $items;
 
     public function mount()
     {
-        $this->items = \App\Models\Item::all();
+        $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
     }
     
     public function render()
     {
         return view('livewire.item-list');
-    }
-
-    public function create()
-    {
-        \App\Models\Item::create([
-            'name' => $this->name,
-            'description' => $this->description,
-        ]);
-
-        $this->name = '';
-        $this->description = '';
-
-        $this->items = \App\Models\Item::all();
     }
 }

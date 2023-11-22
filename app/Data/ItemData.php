@@ -2,14 +2,14 @@
 
 namespace App\Data;
 
-use Spatie\LaravelData\Data;
-
-class ItemData extends Data implements \Livewire\Wireable
+class ItemData extends \Spatie\LaravelData\Data implements \Livewire\Wireable
 {
     use \Spatie\LaravelData\Concerns\WireableData;
 
     public function __construct(
+      public int $id,
       public string $name,
-      public string $description
+      public string $description,
+      public string $created_at, 
     ) {}
 }
