@@ -7,7 +7,6 @@
         </button> 
     </div>
     @endforeach
-
     <form wire:submit="save">
         <input type="text" wire:model="form.name">
         <div>

@@ -9,8 +9,12 @@ class ItemShow extends \Livewire\Component
 
     public function mount(int $id)
     {
-        $this->item = \App\Data\ItemData::from(\App\Models\Item::find($id));
-        $this->form->setItem(\App\Models\Item::find($id));
+        $this->item = \App\Data\ItemData::from(
+            \App\Models\Item::find($id)
+        );
+        $this->form->setItem(
+            \App\Models\Item::find($id)
+        );
     }
 
     public function render()
@@ -21,6 +25,8 @@ class ItemShow extends \Livewire\Component
     public function update()
     {
         $this->form->update(); 
-        $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
+        $this->items = \App\Data\ItemData::collection(
+            \App\Models\Item::all()
+        )->toCollection();
     }
 }
