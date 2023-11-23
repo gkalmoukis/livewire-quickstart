@@ -9,7 +9,7 @@ class ItemShow extends \Livewire\Component
 
     public function mount(int $id)
     {
-        $item = \App\Models\Item::find($id);
+        $item = \App\Models\Item::with('statuses')->findOrFail($id);
         $this->form->setItem($item);
         $this->item = \App\Data\ItemData::from($item);
     }
