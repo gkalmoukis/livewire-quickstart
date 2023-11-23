@@ -21,7 +21,13 @@ class ItemList extends \Livewire\Component
     public function save()
     {
         $this->form->store(); 
+        $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
+    }
 
+    public function delete($id)
+    {
+        $item = \App\Models\Item::findOrFail($id);
+        $item->delete();
         $this->items = \App\Data\ItemData::collection(\App\Models\Item::all())->toCollection();
     }
 }

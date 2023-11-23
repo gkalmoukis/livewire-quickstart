@@ -18,7 +18,6 @@ class ItemForm extends Form
     public function setItem(\App\Models\Item $item)
     {
         $this->item = $item;
-
         $this->name = $item->name;
         $this->description = $item->description;
 
@@ -27,18 +26,15 @@ class ItemForm extends Form
     public function store() 
     {
         $this->validate();
- 
         \App\Models\Item::create(
             $this->all()
         );
-
         $this->reset(); 
     }
 
     public function update()
     {
         $this->validate();
- 
         $this->item->update(
             $this->all()
         );

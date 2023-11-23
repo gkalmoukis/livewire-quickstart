@@ -1,7 +1,10 @@
-<div>
+<div>   
     @foreach($items as $item)
     <div> 
         <a href="{{route('show', $item->id)}}">{{$item->name}}</a>
+        <button wire:click="delete({{ $item->id }})">
+            {{__('delete')}}
+        </button> 
     </div>
     @endforeach
 
@@ -15,10 +18,10 @@
             @error('form.description') <span class="error">{{ $message }}</span> @enderror
         </div>
         <button type="submit">
-            Save 
-            <div wire:loading>
-                Loading...
-            </div>        
+            {{__('save')}}      
         </button>
     </form>
+    <div wire:loading>
+        {{__('loading')}}
+    </div>
 </div>
