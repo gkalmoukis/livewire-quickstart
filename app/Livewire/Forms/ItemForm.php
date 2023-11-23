@@ -12,7 +12,7 @@ class ItemForm extends Form
     #[Validate('required|string')]
     public $name = '';
  
-    #[Validate('required|string')]
+    #[Validate('nullable|string')]
     public $description = '';
 
     public function setItem(\App\Models\Item $item)
