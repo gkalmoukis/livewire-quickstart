@@ -20,7 +20,6 @@ class ItemForm extends Form
         $this->item = $item;
         $this->name = $item->name;
         $this->description = $item->description;
-
     }
 
     public function store() 
