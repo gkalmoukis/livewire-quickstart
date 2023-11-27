@@ -1,8 +1,4 @@
-<div>
-    
-    {{-- <h1>{{$item->name}}</h1>
-    <p>{{$item->description}}</p> --}}
-    
+<div>    
     <h5>{{__('Item')}}</h5>
     <div>
         <div>{{$item->id}}</div>
@@ -15,6 +11,17 @@
     <div>
         <div>{{$item->status?->name}} {{$item->status?->color}} {{$item->status?->created_at}}</div>
     </div>
+    <form wire:submit="updateStatus">
+        <input type="hidden" wire:model="itemStatusForm.item_id">
+        <select wire:model="itemStatusForm.status_id">
+        @foreach($statuses as $status)
+            <option value="{{ $status->id }}">{{ $status->name }}</option>
+        @endforeach
+        </select>
+        <button type="submit">
+            Update        
+        </button>
+    </form>
 
     <h5>{{__('edit')}}</h5>
     <div>
