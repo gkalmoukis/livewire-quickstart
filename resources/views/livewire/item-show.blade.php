@@ -1,38 +1,6 @@
 <div> 
-    <div>
-        <div class="px-4 sm:px-0">
-          <h3 class="text-base font-semibold leading-7 text-gray-900">{{ $item->name }}</h3>
-          <p class="mt-1 max-w-2xl text-sm leading-6 text-gray-500">{{ $item->description }}</p>
-        </div>
-        <div class="mt-6 border-t border-gray-100">
-          <dl class="divide-y divide-gray-100">
-            
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt class="text-sm font-medium leading-6 text-gray-900">{{ __('id') }}</dt>
-                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$item->id}}</dd>
-            </div>
-           
-            <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                <dt class="text-sm font-medium leading-6 text-gray-900">{{ __('created_at') }}</dt>
-                <dd class="mt-1 text-sm leading-6 text-gray-700 sm:col-span-2 sm:mt-0">{{$item->created_at}}</dd>
-            </div>
-           
-          </dl>
-        </div>
-      </div>   
-    <h5>{{__('Item')}}</h5>
-    <div>
-        <div>{{$item->id}}</div>
-        <div>{{$item->name}}</div>
-        <div>{{$item->description}}</div>
-        <div>{{$item->created_at}}</div>
-    </div>
     
-    <h5>{{__('status')}}</h5>
-    <div>
-        <div>{{$item->status?->name}} {{$item->status?->color}} {{$item->status?->created_at}}</div>
-    </div>
-    <form wire:submit="updateStatus">
+    {{-- <form wire:submit="updateStatus">
         
         <input type="hidden" wire:model="itemStatusForm.item_id">
         <select wire:model="itemStatusForm.status_id">
@@ -43,26 +11,69 @@
         <button type="submit">
             Update        
         </button>
-    </form>
+    </form> --}}
 
-    <h5>{{__('edit')}}</h5>
-    <div>
+   
+   
+    <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
         <form wire:submit="update">
-            <input type="text" wire:model="form.name">
-            <div>
-                @error('form.name') <span class="error">{{ $message }}</span> @enderror
-            </div>
-            <input type="text" wire:model="form.description">
-            <div>
-                @error('form.description') <span class="error">{{ $message }}</span> @enderror
-            </div>
+            <dl class="-my-3 divide-y divide-gray-100 text-sm">
+
+                <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                    <dt class="font-medium text-gray-900">{{__('Id')}}</dt>
+                    <dd class="text-gray-700 sm:col-span-2">{{$item->id}}</dd>
+                </div>
+    
+              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium text-gray-900">{{__('Name')}}</dt>
+                <dd class="text-gray-700 sm:col-span-2">
+                    <input type="text" wire:model="form.name" placeholder="{{__('Item name')}}" class="mt-1 w-full border-gray-200 sm:text-sm"/>
+                    @error('form.name') <span class="error">{{ $message }}</span> @enderror
+                </dd>
+              </div>
+    
+              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium text-gray-900">{{__('Status')}}</dt>
+                <dd class="text-gray-700 sm:col-span-2"> 
+                    <span class="whitespace-nowrap rounded-full bg-[{{$item->status?->color}}] px-2.5 py-0.5 text-sm">
+                        {{$item->status?->name}}
+                    </span>
+                    {{$item->status?->created_at}}
+                </dd>
+              </div>
+          
+              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium text-gray-900">{{__('Created At')}}</dt>
+                <dd class="text-gray-700 sm:col-span-2">{{$item->created_at}}</dd>
+              </div>
+          
+              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                <dt class="font-medium text-gray-900">{{__('Description')}}</dt>
+                <dd class="text-gray-700 sm:col-span-2">
+                    <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.0/dist/trix.css">
+                    
+                    <input id="inputDescription" type="hidden" wire:model="form.description">
+                    <trix-editor input="inputDescription"></trix-editor>
+                    @error('form.description') 
+                        <span class="error">{{ $message }}</span> 
+                    @enderror
+                    <script type="text/javascript" src="https://unpkg.com/trix@2.0.0/dist/trix.umd.min.js"></script>
+                    <script>
+                        const descriptionEditor = document.querySelector("#inputDescription")
+                    
+                        addEventListener("trix-blur", function(event) {
+                            @this.set('value', descriptionEditor.getAttribute('value'))
+                        })
+                    </script>
+                </dd>
+              </div>
+              
+             
+            </dl>
             <button type="submit">
-                Save 
-                <div wire:loading>
-                    Loading...
-                </div>        
+                {{__('Save changes')}} 
+                <div wire:loading>{{__('Loading')}}</div>        
             </button>
         </form>
-    </div>
-    
+      </div>
 </div>
